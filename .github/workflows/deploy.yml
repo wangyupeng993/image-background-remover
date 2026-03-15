@@ -20,11 +20,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: ./node_modules/.bin/next build
+      - name: Install and build
+        run: |
+          npm install --no-audit --no-fund
+          ls -la node_modules/.bin/next || echo "next binary missing!"
+          npx next build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
